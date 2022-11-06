@@ -6,6 +6,8 @@
 #define IMAGE_TRANSFORMER_FILE_H
 
 #include <bits/types/FILE.h>
+#include <errno.h>
+#include <stdio.h>
 
 enum file_open_status {
     FL_OPEN_OK = 0,

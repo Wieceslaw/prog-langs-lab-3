@@ -2,8 +2,8 @@
 // Created by wieceslaw on 06.11.22.
 //
 
-#include <malloc.h>
 #include "image.h"
+
 struct image image_initialize(uint64_t width, uint64_t height) {
     struct image img = {
             .height = height,

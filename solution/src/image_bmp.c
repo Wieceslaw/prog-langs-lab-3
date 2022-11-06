@@ -2,8 +2,6 @@
 // Created by wieceslaw on 06.11.22.
 //
 
-#include <stdio.h>
-#include <malloc.h>
 #include "image_bmp.h"
 
 #define ZERO 0

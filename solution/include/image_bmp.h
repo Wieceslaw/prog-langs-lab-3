@@ -7,6 +7,8 @@
 
 
 #include <bits/types/FILE.h>
+#include <stdio.h>
+#include <malloc.h>
 #include "image.h"
 
 /*  header  */

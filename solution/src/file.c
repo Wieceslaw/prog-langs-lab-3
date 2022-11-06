@@ -2,8 +2,7 @@
 // Created by wieceslaw on 06.11.22.
 //
 
-#include <stdio.h>
-#include <errno.h>
+
 #include "file.h"
 
 enum file_close_status file_close(FILE* file) {
