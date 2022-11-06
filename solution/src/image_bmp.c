@@ -60,10 +60,10 @@ enum write_status to_bmp(FILE* out, struct image const* img) {
 
 enum read_status from_bmp(FILE* in, struct image* img) {
     // todo: add checks
-    struct bmp_header* header = malloc(sizeof(struct bmp_header));
-    fread(header, sizeof(struct bmp_header), 1, in);
-    uint64_t width = header->biWidth;
-    uint64_t height = header->biHeight;
+    struct bmp_header header;
+    fread(&header, sizeof(struct bmp_header), 1, in);
+    uint64_t width = header.biWidth;
+    uint64_t height = header.biHeight;
     *img = image_initialize(width, height);
     uint64_t byte_width = width * sizeof(struct pixel);
     uint8_t padding = 0;
