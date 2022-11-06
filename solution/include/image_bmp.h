@@ -7,8 +7,8 @@
 
 #include "image.h"
 #include <bits/types/FILE.h>
-#include <stdio.h>
 #include <malloc.h>
+#include <stdio.h>
 
 /*  header  */
 struct __attribute__((packed)) bmp_header
