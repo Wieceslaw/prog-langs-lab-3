@@ -1,5 +1,4 @@
-#include <err.h>
-#include <stdlib.h>
+#include "main.h"
 #include "file.h"
 #include "image_bmp.h"
 #include "transform_rotate.h"
