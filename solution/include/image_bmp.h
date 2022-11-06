@@ -5,11 +5,10 @@
 #ifndef IMAGE_TRANSFORMER_IMAGE_BMP_H
 #define IMAGE_TRANSFORMER_IMAGE_BMP_H
 
-
+#include "image.h"
 #include <bits/types/FILE.h>
 #include <stdio.h>
 #include <malloc.h>
-#include "image.h"
 
 /*  header  */
 struct __attribute__((packed)) bmp_header
