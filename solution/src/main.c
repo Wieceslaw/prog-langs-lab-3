@@ -16,18 +16,24 @@ int main( int argc, char** argv ) {
     enum file_open_status open_status;
     open_status = file_open(&in, argv[1], "rb");
     if (open_status != FL_OPEN_OK) {
-        err(EXIT_FAILURE, "Source in opening error.");
+        err(EXIT_FAILURE, "Error occurred when opening input file.");
     }
     open_status = file_open(&out, argv[2], "wb");
     if (open_status != FL_OPEN_OK) {
-        err(EXIT_FAILURE, "Source in opening error.");
+        err(EXIT_FAILURE, "Error occurred when opening output file.");
     }
 
     struct image img;
     struct image new_img;
-    from_bmp(in, &img);
+    enum read_status read_status = from_bmp(in, &img);
+    if (read_status) {
+        err(EXIT_FAILURE, "Error occurred when reading input file");
+    }
     new_img = rotate(img);
-    to_bmp(out, &new_img);
+    enum write_status write_status = to_bmp(out, &new_img);
+    if (write_status) {
+        err(EXIT_FAILURE, "Error occurred when writing input file");
+    }
 
     image_destroy(img);
     image_destroy(new_img);

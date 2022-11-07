@@ -30,8 +30,6 @@ struct __attribute__((packed)) bmp_header
     uint32_t biClrImportant; // 0
 };
 
-struct bmp_header bmp_header_initialize(uint64_t width, uint64_t height);
-
 /*  deserializer   */
 enum read_status  {
     READ_OK = 0,
