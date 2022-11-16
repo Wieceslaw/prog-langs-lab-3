@@ -39,7 +39,7 @@ enum read_status  {
     /* other error codes  */
 };
 
-enum read_status from_bmp(FILE* in, struct image* img);
+enum read_status from_bmp(FILE* const in, struct image* const img);
 
 /*  serializer   */
 enum  write_status  {
@@ -48,7 +48,7 @@ enum  write_status  {
     /* other error codes  */
 };
 
-enum write_status to_bmp(FILE* out, struct image const* img);
+enum write_status to_bmp(FILE* const out, struct image const img);
 
 
 #endif //IMAGE_TRANSFORMER_IMAGE_BMP_H

@@ -5,7 +5,7 @@
 
 #include "file.h"
 
-enum file_close_status file_close(FILE* file) {
+enum file_close_status file_close(FILE* const file) {
     if (fclose(file) != 0) {
         switch (errno) {
             default: return FL_CLOSE_ERR;
@@ -14,7 +14,7 @@ enum file_close_status file_close(FILE* file) {
     return FL_CLOSE_OK;
 }
 
-enum file_open_status file_open(FILE** file, char* file_name, char* mode) {
+enum file_open_status file_open(FILE** const file, char const * const file_name, char const * const mode) {
     *file = fopen(file_name, mode);
     if (file == NULL) {
         switch (errno) {

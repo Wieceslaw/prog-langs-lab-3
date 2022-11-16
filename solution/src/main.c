@@ -23,14 +23,14 @@ int main( int argc, char** argv ) {
         err(EXIT_FAILURE, "Error occurred when opening output file.");
     }
 
-    struct image img;
-    struct image new_img;
+    struct image img = {0};
+    struct image new_img = {0};
     enum read_status read_status = from_bmp(in, &img);
     if (read_status) {
         err(EXIT_FAILURE, "Error occurred when reading input file");
     }
     new_img = rotate(img);
-    enum write_status write_status = to_bmp(out, &new_img);
+    enum write_status write_status = to_bmp(out, new_img);
     if (write_status) {
         err(EXIT_FAILURE, "Error occurred when writing input file");
     }

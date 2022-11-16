@@ -16,7 +16,7 @@ enum file_open_status {
     /* other status codes */
 };
 
-enum file_open_status file_open(FILE** file, char* file_name, char* mode);
+enum file_open_status file_open(FILE** const file, char const * const file_name, char const * const mode);
 
 enum file_close_status {
     FL_CLOSE_OK,
@@ -24,6 +24,6 @@ enum file_close_status {
     /* other status codes */
 };
 
-enum file_close_status file_close(FILE* file);
+enum file_close_status file_close(FILE* const file);
 
 #endif //IMAGE_TRANSFORMER_FILE_H

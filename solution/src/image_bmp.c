@@ -42,7 +42,7 @@ static uint8_t calc_padding(uint64_t width) {
     return padding;
 }
 
-static enum read_status validate_header(struct bmp_header header) {
+static enum read_status validate_header(struct bmp_header const header) {
     if (header.bfType != 0x4D42) {
         return READ_INVALID_SIGNATURE;
     }
@@ -52,30 +52,28 @@ static enum read_status validate_header(struct bmp_header header) {
     return READ_OK;
 }
 
-enum write_status to_bmp(FILE* out, struct image const* img) {
+enum write_status to_bmp(FILE* const out, struct image const img) {
     size_t written;
-    struct bmp_header header = bmp_header_initialize(img->width, img->height);
+    struct bmp_header header = bmp_header_initialize(img.width, img.height);
     written = fwrite(&header, sizeof(struct bmp_header), 1, out);
     if (written != 1) {
         return WRITE_ERROR;
     }
-    uint64_t byte_width = img->width * sizeof(struct pixel);
-    uint8_t padding = 0;
-    if (byte_width % 4 != 0) {
-        padding = ((byte_width / 4) * 4) + 4 - byte_width;
-    }
-    for (uint64_t y = 0; y < img->height; y++) {
-        written = fwrite(img->data + y * img->width, sizeof(struct pixel), img->width, out);
-        if (written != img->width) {
+    uint8_t padding = calc_padding(img.width);
+    for (uint64_t y = 0; y < img.height; y++) {
+        written = fwrite(img.data + y * img.width, sizeof(struct pixel), img.width, out);
+        if (written != img.width) {
             return WRITE_ERROR;
         }
-        fseek(out, padding, SEEK_CUR);
+        if (fseek(out, padding, SEEK_CUR) == -1) {
+            return WRITE_ERROR;
+        }
     }
     return WRITE_OK;
 }
 
-enum read_status from_bmp(FILE* in, struct image* img) {
-    struct bmp_header header;
+enum read_status from_bmp(FILE* const in, struct image* const img) {
+    struct bmp_header header = {0};
     if (!fread(&header, sizeof(struct bmp_header), 1, in)) {
         return READ_INVALID_BITS;
     }
@@ -91,7 +89,9 @@ enum read_status from_bmp(FILE* in, struct image* img) {
         if (!fread(img->data + y * width, width * sizeof(struct pixel), 1, in)) {
             return READ_INVALID_BITS;
         }
-        fseek(in, padding, SEEK_CUR);
+        if (fseek(in, padding, SEEK_CUR) == -1) {
+            return READ_INVALID_BITS;
+        }
     }
     return READ_OK;
 }

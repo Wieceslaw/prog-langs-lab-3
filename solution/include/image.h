@@ -10,7 +10,9 @@
 #include <stddef.h>
 #include <stdint.h>
 
-struct pixel { uint8_t b, g, r; };
+struct __attribute__((packed)) pixel {
+    uint8_t b, g, r;
+};
 
 struct image {
     uint64_t width, height;
